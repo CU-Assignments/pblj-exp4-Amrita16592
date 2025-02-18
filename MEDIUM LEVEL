@@ -1,0 +1,58 @@
+import java.util.*;
+
+public class CardCollection {
+    public static void main(String[] args) {
+    HashMap<String, List<String>> cardMap = new HashMap<>();
+    Scanner sc = new Scanner(System.in);
+    int choice;
+
+    do {
+    System.out.println("\nCard Collection System:");
+    System.out.println("1. Add Card");
+    System.out.println("2. Find Cards by Symbol");
+    System.out.println("3. Display All Cards");
+    System.out.println("4. Exit");
+    System.out.print("Enter choice: ");
+    choice = sc.nextInt();
+    sc.nextLine(); 
+
+    switch (choice) {
+    case 1:
+    System.out.print("Enter Card Symbol: ");
+    String symbol = sc.nextLine();
+    System.out.print("Enter Card Name: ");
+    String cardName = sc.nextLine();
+    cardMap.putIfAbsent(symbol, new ArrayList<>());
+    cardMap.get(symbol).add(cardName);
+    System.out.println("Card Added!");
+    break;
+
+    case 2:
+    System.out.print("Enter Symbol to Find Cards: ");
+    String findSymbol = sc.nextLine();
+    if (cardMap.containsKey(findSymbol)) {
+    System.out.println("Cards in " + findSymbol + ": " + cardMap.get(findSymbol));
+    } else {
+    System.out.println("No Cards Found for this Symbol!");
+    }
+    break;
+
+    case 3:
+    System.out.println("\nAll Cards:");
+    for (Map.Entry<String, List<String>> entry : cardMap.entrySet()) {
+    System.out.println(entry.getKey() + ": " + entry.getValue());
+    }
+    break;
+
+    case 4:
+    System.out.println("Exiting...");
+    break;
+
+    default:
+    System.out.println("Invalid Choice! Try Again.");
+    }
+    } while (choice != 4);
+
+    sc.close();
+    }
+}
